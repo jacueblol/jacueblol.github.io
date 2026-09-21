@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacob Hotz — CS Student & Robotics Programmer</title>
+<meta name="description" content="Portfolio of Jacob Hotz, a Computer Science student at Colorado School of Mines with hands-on experience in robotics, systems, and full-stack development.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="smoke-canvas" aria-hidden="true"></canvas>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav-wrap">
+  <nav class="nav">
+    <a href="#hero" class="nav-logo" aria-label="Jacob Hotz — home">JH<span class="cursor-blink">_</span></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" data-nav>about</a></li>
+      <li><a href="#experience" data-nav>experience</a></li>
+      <li><a href="#projects" data-nav>projects</a></li>
+      <li><a href="#skills" data-nav>skills</a></li>
+      <li><a href="#contact" data-nav>contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme" title="Toggle theme">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a class="btn btn-small" href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">résumé</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow" data-reveal>Hi, I&apos;m</p>
+      <h1 class="hero-name" data-reveal>Jacob Hotz</h1>
+      <p class="hero-role" data-reveal>
+        <span class="role-prefix">building</span>
+        <span class="role-rotator" id="roleRotator" aria-live="polite"></span>
+      </p>
+      <p class="hero-blurb" data-reveal>
+        CS student at Colorado School of Mines with hands-on range across robotics, systems,
+        and full-stack development — and a fast track record of picking up new tools on the job.
+      </p>
+      <div class="hero-cta" data-reveal>
+        <a href="#projects" class="btn btn-primary">view projects</a>
+        <a href="#contact" class="btn btn-ghost">get in touch</a>
+      </div>
+      <p class="hero-hint" data-reveal>move your cursor — it leaves smoke</p>
+    </div>
+    <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+      <span></span>
+    </a>
+  </section>
+
+  <section id="about" class="section">
+    <div class="section-head" data-reveal>
+      <span class="section-tag">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text" data-reveal>
+        <p>
+          I'm a Computer Science student at the <strong>Colorado School of Mines</strong>, focusing on
+          Robotic &amp; Intelligent Systems with a minor in Electrical Engineering. Most of what I know
+          about writing real software came from robots that had to work <em>right now</em>, on a field,
+          in front of judges — there's no better teacher than a deadline that doesn't move.
+        </p>
+        <p>
+          As Lead Programmer for FRC Team 4738, I split my time between writing competition code and
+          mentoring ten-plus newer programmers through the same mistakes I made a year earlier. I like
+          systems that touch the physical world — kinematics, control loops, sensors that lie to you
+          sometimes — as much as I like clean full-stack apps that just work.
+        </p>
+        <p>
+          Outside of code: I recruit for a 90-member fraternity chapter, and I used to teach sailing to
+          kids who occasionally tried to steer straight into the dock.
+        </p>
+      </div>
+      <div class="about-facts" data-reveal>
+        <div class="fact">
+          <span class="fact-label">based in</span>
+          <span class="fact-value">San Diego, CA</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">studying at</span>
+          <span class="fact-value">Colorado School of Mines</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">focus</span>
+          <span class="fact-value">Robotic &amp; Intelligent Systems</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">grad year</span>
+          <span class="fact-value">2028</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <div class="section-head" data-reveal>
+      <span class="section-tag">02</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <article class="timeline-item" data-reveal>
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-top">
+            <h3>Lead Programmer</h3>
+            <span class="timeline-date">2023 — Present</span>
+          </div>
+          <p class="timeline-org">FRC Team 4738 · San Diego, CA</p>
+          <ul>
+            <li>Trained and mentored 10+ inexperienced programmers in core programming concepts, robotics software design, and problem-solving strategies.</li>
+            <li>Guided students through development of competition-ready robot software via hands-on instruction, debugging sessions, and design reviews.</li>
+            <li>Led the programming team through two international competitions involving 3,300+ participating teams.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-reveal>
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-top">
+            <h3>Recruitment Chair</h3>
+            <span class="timeline-date">2024 — Present</span>
+          </div>
+          <p class="timeline-org">Alpha Tau Omega Fraternity · Golden, CO</p>
+          <ul>
+            <li>Recruited an average of ~20 new members per semester for a 90-member chapter.</li>
+            <li>Managed high-stress situations, resolving emergent issues in real time to keep operations smooth.</li>
+            <li>Led a team of members to make decisions quickly and efficiently within short time frames.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="timeline-item" data-reveal>
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-top">
+            <h3>Sailing Instructor</h3>
+            <span class="timeline-date">Summers</span>
+          </div>
+          <p class="timeline-org">Associated Students · Mission Bay, CA</p>
+          <ul>
+            <li>Delivered structured sailing instruction to children and adults while maintaining responsibility for high-value equipment.</li>
+            <li>Worked directly with clients in a service-oriented role, adapting communication styles to varied skill levels.</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="section-head" data-reveal>
+      <span class="section-tag">03</span>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project-card project-card-feature" data-reveal>
+        <div class="project-top">
+          <span class="project-year">2024</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol/AdvantageKit_Swerve_Patribots" target="_blank" rel="noopener" aria-label="View FRC Crescendo code on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>FRC Robot Code — Crescendo</h3>
+        <p>
+          Competition-ready robot software for the 2024 FRC season using object-oriented design and
+          swerve-drive kinematics for autonomous and driver-controlled modes. Implemented odometry-based
+          pose estimation and collaborated with hardware/controls teams while mentoring junior programmers.
+        </p>
+        <div class="project-tags">
+          <span>Java</span><span>WPILib</span><span>Kinematics</span><span>Odometry</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal>
+        <div class="project-top">
+          <span class="project-year">In Progress</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol/2D-Arm" target="_blank" rel="noopener" aria-label="View 2D Robotic Arm Simulation on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>2D Robotic Arm Simulation</h3>
+        <p>
+          A 2D robotic arm simulator with a WPILib-style architecture, focused on control systems and
+          kinematic behavior. Implemented a custom PID controller to regulate joint motion and system
+          stability, built for interactive development and future expansion.
+        </p>
+        <div class="project-tags">
+          <span>Rust</span><span>PID Control</span><span>Kinematics</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal>
+        <div class="project-top">
+          <span class="project-year">2023</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol/signin-site" target="_blank" rel="noopener" aria-label="View Sign-In Site on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>Sign-In Site</h3>
+        <p>
+          A full-stack authentication system with a React frontend and Firebase backend — user
+          authentication, data storage, and secure session handling.
+        </p>
+        <div class="project-tags">
+          <span>React</span><span>Firebase</span><span>Auth</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal>
+        <div class="project-top">
+          <span class="project-year">2023</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol/MVC-Othello" target="_blank" rel="noopener" aria-label="View Othello on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>Othello</h3>
+        <p>
+          A classic Othello game built with an MVC architecture to separate game logic, UI, and
+          control flow, with a Minimax + Alpha-Beta pruning AI opponent.
+        </p>
+        <div class="project-tags">
+          <span>Java</span><span>MVC</span><span>Minimax / Alpha-Beta</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal>
+        <div class="project-top">
+          <span class="project-year">2022</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol/Physics-Engine" target="_blank" rel="noopener" aria-label="View Physics Engine on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>Physics Engine</h3>
+        <p>
+          A from-scratch physics engine implementing motion updates and force application, structured
+          with Maven for dependency management and modular design.
+        </p>
+        <div class="project-tags">
+          <span>C++</span><span>Simulation</span><span>Maven</span>
+        </div>
+      </article>
+
+      <article class="project-card" data-reveal>
+        <div class="project-top">
+          <span class="project-year">2023</span>
+          <div class="project-links">
+            <a href="https://github.com/jacueblol?tab=repositories&q=CSCI210" target="_blank" rel="noopener" aria-label="View FRC Charged Up related repositories on GitHub">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.4-5.26 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3>FRC Robot Code — Charged Up</h3>
+        <p>
+          Object-oriented robot control software under competition constraints, implementing arm
+          kinematics for game-piece placement and AprilTag-based vision alignment.
+        </p>
+        <div class="project-tags">
+          <span>Java</span><span>Computer Vision</span><span>Kinematics</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="section-head" data-reveal>
+      <span class="section-tag">04</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group" data-reveal>
+        <h3>Languages</h3>
+        <div class="pill-row">
+          <span class="pill">C</span><span class="pill">C++</span><span class="pill">Rust</span>
+          <span class="pill">Python</span><span class="pill">Java</span>
+        </div>
+      </div>
+      <div class="skill-group" data-reveal>
+        <h3>Web</h3>
+        <div class="pill-row">
+          <span class="pill">JavaScript</span><span class="pill">React</span>
+          <span class="pill">HTML</span><span class="pill">CSS</span>
+        </div>
+      </div>
+      <div class="skill-group" data-reveal>
+        <h3>Concepts</h3>
+        <div class="pill-row">
+          <span class="pill">Data Structures</span><span class="pill">Algorithms</span>
+          <span class="pill">Computer Organization</span><span class="pill">Embedded Systems</span>
+        </div>
+      </div>
+      <div class="skill-group" data-reveal>
+        <h3>Tools</h3>
+        <div class="pill-row">
+          <span class="pill">Git</span><span class="pill">Bash / Linux</span><span class="pill">Docker</span>
+          <span class="pill">Maven</span><span class="pill">Firebase</span><span class="pill">WPILib</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="education-card" data-reveal>
+      <div>
+        <h3>B.S. Computer Science — Robotic &amp; Intelligent Systems</h3>
+        <p>Minor in Electrical Engineering (Information &amp; Systems Sciences)</p>
+      </div>
+      <div class="education-meta">
+        <span>Colorado School of Mines</span>
+        <span>Expected 2028</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="footer">
+  <div class="footer-inner" data-reveal>
+    <p class="footer-eyebrow">05 / say hi</p>
+    <h2 class="footer-title">Let's build<br>something.</h2>
+    <a class="footer-email" href="mailto:jacob_hotz@mines.edu">jacob_hotz@mines.edu</a>
+    <div class="footer-links">
+      <a href="https://github.com/jacueblol" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://linkedin.com/in/jacob-hotz" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+    </div>
+    <p class="footer-note">San Diego, CA · built with vanilla HTML/CSS/JS · no framework, all smoke &amp; mirrors</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
