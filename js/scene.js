@@ -12,8 +12,10 @@ if (canvas) {
 function init() {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // WebGL is a progressive enhancement here — skip it only on true phone-width screens.
-  if (window.innerWidth < 480) {
+  // The scene is light enough (26 small cubes, basic materials, no
+  // post-processing) to run fine on phones — only bail out on genuinely
+  // unusual viewport widths, not real phone screens.
+  if (window.innerWidth < 280) {
     canvas.remove();
     return;
   }
