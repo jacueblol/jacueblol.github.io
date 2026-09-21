@@ -242,6 +242,8 @@
       li.addEventListener('click', () => runCommand(cmd));
       commandList.appendChild(li);
     });
+    const selectedEl = commandList.children[selectedIndex];
+    if (selectedEl) selectedEl.scrollIntoView({ block: 'nearest' });
   }
 
   function runCommand(cmd) {
@@ -262,7 +264,10 @@
     commandInput.value = '';
     filterCommands('');
     commandPalette.showModal();
-    commandInput.focus();
+    // rAF, not a direct call: some browsers still resolve their own
+    // dialog auto-focus after showModal() returns, which can otherwise
+    // clobber this and leave focus somewhere arrow keys don't reach it
+    requestAnimationFrame(() => commandInput.focus());
   }
   function closeCommandPalette() {
     if (commandPalette.open) commandPalette.close();
@@ -270,7 +275,11 @@
 
   commandPaletteToggle.addEventListener('click', openCommandPalette);
   commandInput.addEventListener('input', () => filterCommands(commandInput.value));
-  commandInput.addEventListener('keydown', (e) => {
+
+  // Delegated at the dialog level, not just the input: arrow keys then work
+  // no matter which element inside the palette actually has focus, instead
+  // of silently doing nothing if focus ever lands somewhere else.
+  commandPalette.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       selectedIndex = Math.min(selectedIndex + 1, filteredCommands.length - 1);
