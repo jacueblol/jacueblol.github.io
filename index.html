@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<canvas id="smoke-canvas" aria-hidden="true"></canvas>
+<canvas id="cube-canvas" aria-hidden="true"></canvas>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -58,7 +58,7 @@
         <a href="#projects" class="btn btn-primary">view projects</a>
         <a href="#contact" class="btn btn-ghost">get in touch</a>
       </div>
-      <p class="hero-hint" data-reveal>move your cursor — it leaves smoke</p>
+      <p class="hero-hint" data-reveal>scroll to watch it come apart, drag to spin it — your cursor pushes the pieces around too</p>
     </div>
     <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
       <span></span>
@@ -354,10 +354,11 @@
       <a href="https://linkedin.com/in/jacob-hotz" target="_blank" rel="noopener">LinkedIn ↗</a>
       <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
     </div>
-    <p class="footer-note">San Diego, CA · built with vanilla HTML/CSS/JS · no framework, all smoke &amp; mirrors</p>
+    <p class="footer-note">San Diego, CA · built with vanilla HTML/CSS/JS + WebGL · 26 real cubies, a spring-damper for your cursor, and scrollY for everything else</p>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
+<script type="module" src="js/scene.js"></script>
 </body>
 </html>
