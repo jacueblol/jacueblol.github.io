@@ -28,7 +28,9 @@ function init() {
   // camera pulls back along this same direction as the cube explodes further
   // (see ZOOM_MAX below), so a bigger explosion still stays framed.
   const CAM_DIR = new THREE.Vector3(3, 2.2, 12);
-  const REST_DIST = CAM_DIR.length();
+  // 1.3x: screenshotting the assembled cube showed it rendering far larger
+  // than intended at rest, overlapping and badly hurting hero text legibility
+  const REST_DIST = CAM_DIR.length() * 1.3;
   CAM_DIR.normalize();
   camera.position.set(3, 2.2, 12);
   camera.lookAt(0, 0, 0);
@@ -227,7 +229,13 @@ function init() {
 
     const damp = reducedMotion ? 1 : 0.06; // softer easing between the current and scroll-target explode state
     currentT += (explodeFraction() - currentT) * damp;
-    currentOpacity += (1 - currentOpacity) * (reducedMotion ? 1 : 0.12); // fades in once on load, then holds
+    // Assembled-and-at-rest, the cube sits directly behind the hero text —
+    // screenshotting confirmed it was solid enough to badly hurt legibility
+    // there. Ramping opacity up as it separates keeps it a strong presence
+    // once it's actual scattered pieces (which doesn't fight the text) while
+    // being much less overpowering in its resting state.
+    const opacityTarget = 0.4 + 0.6 * smoothstep(currentT);
+    currentOpacity += (opacityTarget - currentOpacity) * (reducedMotion ? 1 : 0.12);
 
     cubies.forEach((c) => {
       const localT = smoothstep(clamp((currentT - c.jitter) / STAGGER_SPAN, 0, 1));
