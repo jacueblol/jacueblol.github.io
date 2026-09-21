@@ -307,4 +307,28 @@
     }
   });
 
+  /* ---------- github stats ---------- */
+  // best-effort social proof: fetched client-side (each visitor's own
+  // browser hits GitHub's public API from their own IP, so the 60/hr
+  // unauthenticated rate limit is per-visitor, not shared). If it fails
+  // for any reason — offline, rate-limited, API shape changes — the fact
+  // block just stays hidden rather than showing a broken empty state.
+  (async () => {
+    const fact = document.getElementById('githubStatFact');
+    const value = document.getElementById('githubStatValue');
+    if (!fact || !value) return;
+    try {
+      const res = await fetch('https://api.github.com/users/jacueblol/repos?per_page=100');
+      if (!res.ok) return;
+      const repos = await res.json();
+      if (!Array.isArray(repos)) return;
+      const original = repos.filter((r) => !r.fork);
+      const stars = original.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+      value.textContent = `${original.length} repos · ${stars} star${stars === 1 ? '' : 's'}`;
+      fact.hidden = false;
+    } catch (e) {
+      // offline or rate-limited — leave it hidden
+    }
+  })();
+
 })();
