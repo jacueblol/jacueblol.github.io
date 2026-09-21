@@ -331,4 +331,93 @@
     }
   })();
 
+  /* ---------- project case studies ---------- */
+  const CASE_STUDIES = {
+    crescendo: {
+      title: 'FRC Robot Code — Crescendo',
+      year: '2024',
+      github: 'https://github.com/jacueblol/AdvantageKit_Swerve_Patribots',
+      tags: ['Java', 'WPILib', 'Kinematics', 'Odometry'],
+      problem: 'Swerve drive gives a competition robot full omnidirectional movement, but that freedom comes with real kinematic complexity — every wheel module has to be commanded independently and consistently, and the robot needs to always know exactly where it is on the field to run reliable autonomous routines.',
+      approach: 'Built the season’s control software around an object-oriented swerve-drive architecture, with odometry-based pose estimation so the robot could track its own field position in both autonomous and driver-controlled modes. Worked directly with the hardware and controls sub-teams to tune the physical response, and mentored junior programmers on code structure along the way.',
+      result: 'Fielded competition-ready code across two international events with 3,300+ participating teams — the kind of environment where code either works under pressure or it doesn’t.',
+    },
+    'arm-sim': {
+      title: '2D Robotic Arm Simulation',
+      year: 'In Progress',
+      github: 'https://github.com/jacueblol/2D-Arm',
+      tags: ['Rust', 'PID Control', 'Kinematics'],
+      problem: 'Tuning control systems on a real robot arm means real hardware risk and slow iteration — every bad gain gets tested on an actual motor. I wanted a sandbox where I could get the control theory right first.',
+      approach: 'Built a 2D robotic arm simulator in Rust, deliberately structured like WPILib’s architecture so the patterns would transfer directly to real robot code. Implemented a custom PID controller from scratch to regulate joint motion and system stability, rather than reaching for an existing control library.',
+      result: 'A working, interactive testbed for control-systems experimentation, architected with future expansion in mind — more joints, disturbances, alternate controllers. Still actively developed.',
+    },
+    signin: {
+      title: 'Sign-In Site',
+      year: '2023',
+      github: 'https://github.com/jacueblol/signin-site',
+      tags: ['React', 'Firebase', 'Auth'],
+      problem: 'Most of my coursework touched algorithms and systems, not much full-stack web with real user accounts — I wanted hands-on practice with authentication and session handling beyond a toy example.',
+      approach: 'Built a React frontend backed by Firebase, implementing user authentication, persistent data storage, and secure session handling end-to-end rather than relying on a pre-built auth widget.',
+      result: 'A working full-stack authentication system and a first real look at production-style user/session management — the unglamorous plumbing that most apps actually depend on.',
+    },
+    othello: {
+      title: 'Othello',
+      year: '2023',
+      github: 'https://github.com/jacueblol/MVC-Othello',
+      tags: ['Java', 'MVC', 'Minimax / Alpha-Beta'],
+      problem: 'Board-game AI is a classic way to actually implement search algorithms instead of just reading about them — I wanted a project where Minimax and pruning weren’t optional, they were the point.',
+      approach: 'Structured the game with an MVC architecture to keep game logic, UI, and control flow cleanly separated, then implemented a Minimax AI opponent with Alpha-Beta pruning to cut down the search space enough to play at a reasonable speed.',
+      result: 'A fully playable Othello game with a competent AI opponent, and an architecture clean enough that swapping the UI or adding a new opponent strategy wouldn’t require touching the game logic at all.',
+    },
+    'physics-engine': {
+      title: 'Physics Engine',
+      year: '2022',
+      github: 'https://github.com/jacueblol/Physics-Engine',
+      tags: ['C++', 'Simulation', 'Maven'],
+      problem: 'Physics and simulation show up everywhere in robotics and game dev, but it’s easy to treat the math as a black box you just call into. I wanted to actually build the box.',
+      approach: 'Implemented motion updates and force application from scratch in C++ — integration, forces, the actual numerical guts — and structured the project with Maven for dependency management and modular design rather than a single monolithic file.',
+      result: 'A working foundational physics engine, and concrete intuition for the math that later showed up directly in robot control loops and kinematics work.',
+    },
+    'charged-up': {
+      title: 'FRC Robot Code — Charged Up',
+      year: '2023',
+      github: 'https://github.com/jacueblol?tab=repositories&q=CSCI210',
+      tags: ['Java', 'Computer Vision', 'Kinematics'],
+      problem: 'The 2023 game demanded precise arm placement of game pieces and reliable field-relative positioning — not just a drivetrain problem, but a kinematics-and-vision problem, under real competition time pressure.',
+      approach: 'Contributed to the season’s object-oriented control software, implementing arm kinematics for accurate game-piece placement and AprilTag-based vision alignment for field positioning, plus hands-on debugging and performance tuning through build season and at competition.',
+      result: 'Competition-ready contributions in my first season on the team — where I first learned what writing robot code under real deadline pressure actually feels like.',
+    },
+  };
+
+  const caseStudyModal = document.getElementById('caseStudyModal');
+  const caseStudyClose = document.getElementById('caseStudyClose');
+
+  function openCaseStudy(slug) {
+    const data = CASE_STUDIES[slug];
+    if (!data || typeof caseStudyModal.showModal !== 'function' || caseStudyModal.open) return;
+    document.getElementById('caseStudyYear').textContent = data.year;
+    document.getElementById('caseStudyGithub').href = data.github;
+    document.getElementById('caseStudyTitle').textContent = data.title;
+    document.getElementById('caseStudyProblem').textContent = data.problem;
+    document.getElementById('caseStudyApproach').textContent = data.approach;
+    document.getElementById('caseStudyResult').textContent = data.result;
+    const tagsEl = document.getElementById('caseStudyTags');
+    tagsEl.innerHTML = '';
+    data.tags.forEach((tag) => {
+      const span = document.createElement('span');
+      span.textContent = tag;
+      tagsEl.appendChild(span);
+    });
+    caseStudyModal.scrollTop = 0;
+    caseStudyModal.showModal();
+  }
+
+  document.querySelectorAll('.project-more').forEach((btn) => {
+    btn.addEventListener('click', () => openCaseStudy(btn.dataset.case));
+  });
+  caseStudyClose.addEventListener('click', () => caseStudyModal.close());
+  caseStudyModal.addEventListener('click', (e) => {
+    if (e.target === caseStudyModal) caseStudyModal.close(); // click on the backdrop
+  });
+
 })();

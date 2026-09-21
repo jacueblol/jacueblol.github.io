@@ -601,6 +601,20 @@ p:last-child { margin-bottom: 0; }
   padding: 0.3em 0.8em;
 }
 
+.project-more {
+  display: inline-flex;
+  margin-top: 1.2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.project-more:hover { color: var(--accent-2); }
+
 /* ---------- skills ---------- */
 .skills-grid {
   display: grid;
@@ -771,6 +785,48 @@ p:last-child { margin-bottom: 0; }
   border: 0;
   background: #ffffff;
 }
+
+.case-study-modal[open] {
+  width: min(640px, 92vw);
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+}
+#caseStudyYear { color: var(--text-faint); }
+.case-study-body {
+  padding: 1.8rem 2rem 2.2rem;
+  overflow-y: auto;
+}
+.case-study-body h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.9rem;
+}
+.case-study-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem;
+}
+.case-study-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3em 0.8em;
+}
+.case-study-section { margin-bottom: 1.5rem; }
+.case-study-section:last-child { margin-bottom: 0; }
+.case-study-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+.case-study-section p { font-size: 0.98rem; }
 
 .command-palette[open] {
   position: fixed;

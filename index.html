@@ -239,6 +239,7 @@
         <div class="project-tags">
           <span>Java</span><span>WPILib</span><span>Kinematics</span><span>Odometry</span>
         </div>
+        <button class="project-more" data-case="crescendo">read the case study →</button>
       </article>
 
       <article class="project-card" data-reveal>
@@ -259,6 +260,7 @@
         <div class="project-tags">
           <span>Rust</span><span>PID Control</span><span>Kinematics</span>
         </div>
+        <button class="project-more" data-case="arm-sim">read the case study →</button>
       </article>
 
       <article class="project-card" data-reveal>
@@ -278,6 +280,7 @@
         <div class="project-tags">
           <span>React</span><span>Firebase</span><span>Auth</span>
         </div>
+        <button class="project-more" data-case="signin">read the case study →</button>
       </article>
 
       <article class="project-card" data-reveal>
@@ -297,6 +300,7 @@
         <div class="project-tags">
           <span>Java</span><span>MVC</span><span>Minimax / Alpha-Beta</span>
         </div>
+        <button class="project-more" data-case="othello">read the case study →</button>
       </article>
 
       <article class="project-card" data-reveal>
@@ -316,6 +320,7 @@
         <div class="project-tags">
           <span>C++</span><span>Simulation</span><span>Maven</span>
         </div>
+        <button class="project-more" data-case="physics-engine">read the case study →</button>
       </article>
 
       <article class="project-card" data-reveal>
@@ -335,6 +340,7 @@
         <div class="project-tags">
           <span>Java</span><span>Computer Vision</span><span>Kinematics</span>
         </div>
+        <button class="project-more" data-case="charged-up">read the case study →</button>
       </article>
 
     </div>
@@ -421,6 +427,34 @@
 <dialog id="commandPalette" class="modal command-palette">
   <input type="text" id="commandInput" class="command-input" placeholder="Jump to a section, toggle theme, copy email…" autocomplete="off" spellcheck="false" aria-label="Command palette search">
   <ul id="commandList" class="command-list"></ul>
+</dialog>
+
+<dialog id="caseStudyModal" class="modal case-study-modal">
+  <div class="modal-head">
+    <span id="caseStudyYear"></span>
+    <div class="modal-head-actions">
+      <a id="caseStudyGithub" href="#" target="_blank" rel="noopener">view code ↗</a>
+      <button id="caseStudyClose" class="icon-btn" aria-label="Close case study">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="case-study-body">
+    <h3 id="caseStudyTitle"></h3>
+    <div class="case-study-tags" id="caseStudyTags"></div>
+    <div class="case-study-section">
+      <span class="case-study-label">the problem</span>
+      <p id="caseStudyProblem"></p>
+    </div>
+    <div class="case-study-section">
+      <span class="case-study-label">the approach</span>
+      <p id="caseStudyApproach"></p>
+    </div>
+    <div class="case-study-section">
+      <span class="case-study-label">the result</span>
+      <p id="caseStudyResult"></p>
+    </div>
+  </div>
 </dialog>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
