@@ -49,42 +49,6 @@
 </head>
 <body>
 
-<!-- TEMPORARY diagnostic: catches any JS error anywhere on the page (not
-     just inside the cube's own try/catch — a module-load failure happens
-     before that ever runs) and shows it visibly, so it's readable on a
-     phone with no dev tools attached. Remove once the cube-on-mobile
-     issue is actually found. -->
-<script>
-(function () {
-  var shown = false;
-  function show(msg) {
-    if (shown) return;
-    shown = true;
-    var el = document.createElement('div');
-    el.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#c41e3a;color:#fff;font:11px/1.4 monospace;padding:10px;white-space:pre-wrap;max-height:45vh;overflow:auto;';
-    el.textContent = '[diag] ' + msg;
-    document.body.appendChild(el);
-  }
-  window.addEventListener('error', function (e) {
-    show((e.message || (e.error && e.error.message) || 'error') + ' @ ' + (e.filename || '?') + ':' + (e.lineno || '?'));
-  });
-  window.addEventListener('unhandledrejection', function (e) {
-    show('promise rejection: ' + (e.reason && e.reason.message ? e.reason.message : e.reason));
-  });
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      if (shown) return;
-      var c = document.getElementById('cube-canvas');
-      // opacity stuck at '' or '0' this long after load means the render
-      // loop never actually started, even though nothing threw
-      if (c && (c.style.opacity === '' || c.style.opacity === '0') && window.innerWidth >= 280) {
-        show('cube canvas exists but never became visible. width=' + window.innerWidth + ' webgl2=' + !!c.getContext('webgl2') + ' webgl1=' + !!c.getContext('webgl'));
-      }
-    }, 3000);
-  });
-})();
-</script>
-
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <canvas id="cube-canvas" aria-hidden="true"></canvas>
