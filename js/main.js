@@ -163,7 +163,11 @@
   const resumeModalClose = document.getElementById('resumeModalClose');
 
   function openResumeModal() {
-    if (typeof resumeModal.showModal === 'function') resumeModal.showModal();
+    // showModal() throws if called while already open, and the command
+    // palette shouldn't be sitting open underneath this one
+    if (typeof resumeModal.showModal !== 'function' || resumeModal.open) return;
+    closeCommandPalette();
+    resumeModal.showModal();
   }
   document.querySelectorAll('[data-resume-trigger]').forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -253,7 +257,8 @@
   }
 
   function openCommandPalette() {
-    if (typeof commandPalette.showModal !== 'function') return;
+    if (typeof commandPalette.showModal !== 'function' || commandPalette.open) return;
+    if (resumeModal.open) resumeModal.close();
     commandInput.value = '';
     filterCommands('');
     commandPalette.showModal();

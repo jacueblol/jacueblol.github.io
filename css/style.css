@@ -703,7 +703,11 @@ p:last-child { margin-bottom: 0; }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.resume-modal {
+/* `display` here MUST be scoped to [open] — the native <dialog> default
+   (dialog:not([open]) { display: none }) is a UA-stylesheet rule, and any
+   unscoped author rule setting display on the element overrides it
+   regardless of specificity, which is what was pinning these open. */
+.resume-modal[open] {
   width: min(860px, 92vw);
   height: min(85vh, 1000px);
   display: flex;
@@ -736,7 +740,7 @@ p:last-child { margin-bottom: 0; }
   background: #ffffff;
 }
 
-.command-palette {
+.command-palette[open] {
   position: fixed;
   top: 14vh;
   left: 50%;
