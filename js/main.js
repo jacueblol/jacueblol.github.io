@@ -16,12 +16,25 @@
 
   applyTheme(storedTheme || (systemLight ? 'light' : 'dark'));
 
-  themeBtn.addEventListener('click', () => {
+  function toggleTheme() {
     const isLight = root.getAttribute('data-theme') === 'light';
     const next = isLight ? 'dark' : 'light';
     applyTheme(next);
     localStorage.setItem('theme', next);
-  });
+    return next;
+  }
+  themeBtn.addEventListener('click', () => toggleTheme());
+
+  /* ---------- scroll progress bar ---------- */
+  const scrollProgress = document.getElementById('scrollProgress');
+  function updateScrollProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const frac = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+    scrollProgress.style.transform = `scaleX(${frac})`;
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress);
+  updateScrollProgress();
 
   /* ---------- mobile nav ---------- */
   const navToggle = document.getElementById('navToggle');
@@ -134,5 +147,148 @@
       card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
   }
+
+  /* ---------- toast ---------- */
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1800);
+  }
+
+  /* ---------- résumé preview modal ---------- */
+  const resumeModal = document.getElementById('resumeModal');
+  const resumeModalClose = document.getElementById('resumeModalClose');
+
+  function openResumeModal() {
+    if (typeof resumeModal.showModal === 'function') resumeModal.showModal();
+  }
+  document.querySelectorAll('[data-resume-trigger]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      if (typeof resumeModal.showModal !== 'function') return; // no <dialog> support: let the link open normally
+      e.preventDefault();
+      openResumeModal();
+    });
+  });
+  resumeModalClose.addEventListener('click', () => resumeModal.close());
+  resumeModal.addEventListener('click', (e) => {
+    if (e.target === resumeModal) resumeModal.close(); // click on the backdrop
+  });
+
+  /* ---------- command palette (Ctrl/Cmd+K) ---------- */
+  const commandPalette = document.getElementById('commandPalette');
+  const commandInput = document.getElementById('commandInput');
+  const commandList = document.getElementById('commandList');
+  const commandPaletteToggle = document.getElementById('commandPaletteToggle');
+
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+  }
+
+  function copyEmail() {
+    const email = 'jacob_hotz@mines.edu';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email)
+        .then(() => showToast('Email copied to clipboard'))
+        .catch(() => showToast(email));
+    } else {
+      showToast(email);
+    }
+  }
+
+  const COMMANDS = [
+    { label: 'Go to About', hint: 'section', action: () => scrollToSection('about') },
+    { label: 'Go to Experience', hint: 'section', action: () => scrollToSection('experience') },
+    { label: 'Go to Projects', hint: 'section', action: () => scrollToSection('projects') },
+    { label: 'Go to Skills', hint: 'section', action: () => scrollToSection('skills') },
+    { label: 'Go to Contact', hint: 'section', action: () => scrollToSection('contact') },
+    { label: 'Toggle theme', hint: 'dark / light', action: () => showToast(`Theme: ${toggleTheme()}`) },
+    { label: 'Copy email address', hint: 'clipboard', action: copyEmail },
+    { label: 'View résumé', hint: 'preview', action: openResumeModal },
+    { label: 'Open GitHub profile', hint: '↗', action: () => window.open('https://github.com/jacueblol', '_blank', 'noopener') },
+    { label: 'Open LinkedIn profile', hint: '↗', action: () => window.open('https://linkedin.com/in/jacob-hotz', '_blank', 'noopener') },
+    { label: 'View site source', hint: '↗', action: () => window.open('https://github.com/jacueblol/jacueblol.github.io', '_blank', 'noopener') },
+  ];
+
+  let filteredCommands = COMMANDS.slice();
+  let selectedIndex = 0;
+
+  function renderCommandList() {
+    commandList.innerHTML = '';
+    if (filteredCommands.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'command-empty';
+      li.textContent = 'No matching commands';
+      commandList.appendChild(li);
+      return;
+    }
+    filteredCommands.forEach((cmd, i) => {
+      const li = document.createElement('li');
+      li.className = i === selectedIndex ? 'selected' : '';
+      const label = document.createElement('span');
+      label.textContent = cmd.label;
+      const hint = document.createElement('span');
+      hint.className = 'cmd-hint';
+      hint.textContent = cmd.hint;
+      li.append(label, hint);
+      li.addEventListener('mouseenter', () => { selectedIndex = i; renderCommandList(); });
+      li.addEventListener('click', () => runCommand(cmd));
+      commandList.appendChild(li);
+    });
+  }
+
+  function runCommand(cmd) {
+    closeCommandPalette();
+    cmd.action();
+  }
+
+  function filterCommands(query) {
+    const q = query.trim().toLowerCase();
+    filteredCommands = q ? COMMANDS.filter((c) => c.label.toLowerCase().includes(q)) : COMMANDS.slice();
+    selectedIndex = 0;
+    renderCommandList();
+  }
+
+  function openCommandPalette() {
+    if (typeof commandPalette.showModal !== 'function') return;
+    commandInput.value = '';
+    filterCommands('');
+    commandPalette.showModal();
+    commandInput.focus();
+  }
+  function closeCommandPalette() {
+    if (commandPalette.open) commandPalette.close();
+  }
+
+  commandPaletteToggle.addEventListener('click', openCommandPalette);
+  commandInput.addEventListener('input', () => filterCommands(commandInput.value));
+  commandInput.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, filteredCommands.length - 1);
+      renderCommandList();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, 0);
+      renderCommandList();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (filteredCommands[selectedIndex]) runCommand(filteredCommands[selectedIndex]);
+    }
+  });
+  commandPalette.addEventListener('click', (e) => {
+    if (e.target === commandPalette) closeCommandPalette(); // click on the backdrop
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (commandPalette.open) closeCommandPalette();
+      else openCommandPalette();
+    }
+  });
 
 })();

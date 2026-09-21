@@ -102,6 +102,18 @@ p:last-child { margin-bottom: 0; }
   opacity: 0; /* JS drives the real opacity via inline style once it's running */
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 200;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
 .icon { width: 20px; height: 20px; display: block; }
 
 /* ---------- nav ---------- */
@@ -292,6 +304,43 @@ p:last-child { margin-bottom: 0; }
   max-width: 560px;
   margin: 0 auto 2.2rem;
   text-shadow: 0 0 20px var(--bg), 0 0 20px var(--bg);
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.45em 1em 0.45em 0.85em;
+  margin: 0 auto 1.8rem;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(10px);
+}
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: #4ade80;
+  opacity: 0.5;
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 .hero-cta {
@@ -634,6 +683,134 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.75rem;
   color: var(--text-faint);
 }
+
+/* ---------- modals (résumé preview + command palette) ---------- */
+.modal {
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow-card-hover);
+}
+.modal::backdrop {
+  background: color-mix(in srgb, var(--bg) 65%, transparent);
+  backdrop-filter: blur(6px);
+}
+.modal[open] { animation: modal-in 0.18s ease; }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.resume-modal {
+  width: min(860px, 92vw);
+  height: min(85vh, 1000px);
+  display: flex;
+  flex-direction: column;
+}
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.modal-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.modal-head-actions a { color: var(--text-dim); transition: color 0.2s ease; }
+.modal-head-actions a:hover { color: var(--accent); }
+.modal-head-actions .icon-btn { width: 28px; height: 28px; }
+.modal-head-actions .icon-btn .icon { width: 14px; height: 14px; }
+.resume-modal iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+.command-palette {
+  position: fixed;
+  top: 14vh;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: min(560px, 92vw);
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.command-input {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 1.1rem 1.3rem;
+  outline: none;
+  flex-shrink: 0;
+}
+.command-input::placeholder { color: var(--text-faint); }
+.command-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+.command-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.command-list li .cmd-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+.command-list li.selected {
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-elevated));
+  color: var(--text);
+}
+.command-list li.selected .cmd-hint { color: var(--accent); }
+.command-list .command-empty {
+  color: var(--text-faint);
+  font-size: 0.88rem;
+  padding: 0.9rem 0.8rem;
+  cursor: default;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translate(-50%, 12px);
+  z-index: 300;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.7em 1.2em;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Jacob Hotz</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.2rem;
+  }
+  .notfound-code {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 16vw, 9rem);
+    line-height: 1;
+    background: linear-gradient(120deg, var(--text) 40%, var(--accent) 70%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .notfound-msg {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 440px;
+    margin: 0;
+  }
+  .notfound-hint {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    margin: 0 0 0.8rem;
+  }
+</style>
+</head>
+<body>
+  <div class="notfound">
+    <p class="notfound-hint">404</p>
+    <h1 class="notfound-code">nothing here</h1>
+    <p class="notfound-msg">
+      That page doesn't exist — probably a broken link, not a broken robot.
+      Everything real lives on the home page.
+    </p>
+    <a class="btn btn-primary" href="/">back home</a>
+  </div>
+</body>
+</html>

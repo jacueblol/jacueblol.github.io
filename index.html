@@ -48,6 +48,8 @@
 </head>
 <body>
 
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
 <canvas id="cube-canvas" aria-hidden="true"></canvas>
 
 <a class="skip-link" href="#main">Skip to content</a>
@@ -66,11 +68,14 @@
       <li><a href="#contact" data-nav>contact</a></li>
     </ul>
     <div class="nav-actions">
+      <button id="commandPaletteToggle" class="icon-btn" aria-label="Open quick navigation (Ctrl+K)" title="Quick nav (Ctrl+K)">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9.5 7 12l2 2.5M15 9.5 17 12l-2 2.5"/></svg>
+      </button>
       <button id="themeToggle" class="icon-btn" aria-label="Toggle color theme" title="Toggle theme">
         <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a class="btn btn-small" href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">résumé</a>
+      <a class="btn btn-small" href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener" data-resume-trigger>résumé</a>
     </div>
   </nav>
 </header>
@@ -89,6 +94,7 @@
         CS student at Colorado School of Mines with hands-on range across robotics, systems,
         and full-stack development — and a fast track record of picking up new tools on the job.
       </p>
+      <p class="availability-badge" data-reveal><span class="pulse-dot" aria-hidden="true"></span>open to summer 2027 internships</p>
       <div class="hero-cta" data-reveal>
         <a href="#projects" class="btn btn-primary">view projects</a>
         <a href="#contact" class="btn btn-ghost">get in touch</a>
@@ -387,11 +393,32 @@
     <div class="footer-links">
       <a href="https://github.com/jacueblol" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://linkedin.com/in/jacob-hotz" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener" data-resume-trigger>Résumé ↗</a>
+      <a href="https://github.com/jacueblol/jacueblol.github.io" target="_blank" rel="noopener">Source ↗</a>
     </div>
     <p class="footer-note">San Diego, CA · built with vanilla HTML/CSS/JS + WebGL · 26 real cubies, a spring-damper for your cursor, and scrollY for everything else</p>
   </div>
 </footer>
+
+<dialog id="resumeModal" class="modal resume-modal">
+  <div class="modal-head">
+    <span>Résumé — Jacob Hotz</span>
+    <div class="modal-head-actions">
+      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">open in new tab ↗</a>
+      <button id="resumeModalClose" class="icon-btn" aria-label="Close résumé preview">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+  <iframe src="assets/jacob-hotz-resume.pdf" title="Jacob Hotz résumé" loading="lazy"></iframe>
+</dialog>
+
+<dialog id="commandPalette" class="modal command-palette">
+  <input type="text" id="commandInput" class="command-input" placeholder="Jump to a section, toggle theme, copy email…" autocomplete="off" spellcheck="false" aria-label="Command palette search">
+  <ul id="commandList" class="command-list"></ul>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="js/main.js"></script>
 <script type="module" src="js/scene.js"></script>
