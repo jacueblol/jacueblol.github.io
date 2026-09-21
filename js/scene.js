@@ -273,7 +273,20 @@ function init() {
     canvas.style.opacity = String(currentOpacity);
 
     renderer.render(scene, camera);
-    requestAnimationFrame(render);
   }
-  requestAnimationFrame(render);
+
+  // Pause the render loop entirely while the tab isn't visible, instead of
+  // burning CPU/battery on a hidden canvas — resume on the same rAF cadence
+  // once it's visible again.
+  function loop(now) {
+    render(now);
+    if (!document.hidden) requestAnimationFrame(loop);
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      lastFrameT = performance.now();
+      requestAnimationFrame(loop);
+    }
+  });
+  requestAnimationFrame(loop);
 }
