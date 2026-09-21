@@ -275,11 +275,24 @@
 
   commandPaletteToggle.addEventListener('click', openCommandPalette);
   commandInput.addEventListener('input', () => filterCommands(commandInput.value));
+  commandPalette.addEventListener('click', (e) => {
+    if (e.target === commandPalette) closeCommandPalette(); // click on the backdrop
+  });
 
-  // Delegated at the dialog level, not just the input: arrow keys then work
-  // no matter which element inside the palette actually has focus, instead
-  // of silently doing nothing if focus ever lands somewhere else.
-  commandPalette.addEventListener('keydown', (e) => {
+  // Handled on window, not the dialog or the input: a keydown listener only
+  // ever fires on its target's ancestors, so if focus isn't actually inside
+  // the dialog for any reason, a listener on the dialog itself never sees
+  // the event at all. window is guaranteed to be an ancestor of wherever
+  // focus is, so gating on commandPalette.open here is the only way this
+  // works regardless of where focus actually landed.
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (commandPalette.open) closeCommandPalette();
+      else openCommandPalette();
+      return;
+    }
+    if (!commandPalette.open) return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       selectedIndex = Math.min(selectedIndex + 1, filteredCommands.length - 1);
@@ -291,17 +304,6 @@
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (filteredCommands[selectedIndex]) runCommand(filteredCommands[selectedIndex]);
-    }
-  });
-  commandPalette.addEventListener('click', (e) => {
-    if (e.target === commandPalette) closeCommandPalette(); // click on the backdrop
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      if (commandPalette.open) closeCommandPalette();
-      else openCommandPalette();
     }
   });
 

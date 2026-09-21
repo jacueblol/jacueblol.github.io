@@ -92,14 +92,15 @@ function init() {
           gridPos,
           explodedPos: gridPos.clone().multiplyScalar(EXPLODE_SCALE),
           tumbleAxis: new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize(),
-          tumbleAngle: 1.1 + Math.random() * 2.2,
-          spinRate: 0.4 + Math.random() * 1.1, // continuous drift speed once free of the pack
+          tumbleAngle: 0.35 + Math.random() * 0.65, // gentle tumble while separating, not a full spin
+          spinPhase: Math.random() * Math.PI * 2,
+          spinRate: 0.15 + Math.random() * 0.3, // slow oscillation once free of the pack, not a continuous spin
           jitter: Math.random() * MAX_JITTER,
           // slow positional wander so a settled piece still feels weightless
           // instead of glued in place, once it's actually separated
           driftPhase: new THREE.Vector3(Math.random(), Math.random(), Math.random()).multiplyScalar(Math.PI * 2),
-          driftFreq: new THREE.Vector3(0.12 + Math.random() * 0.18, 0.12 + Math.random() * 0.18, 0.12 + Math.random() * 0.18),
-          driftAmp: 0.14 + Math.random() * 0.18,
+          driftFreq: new THREE.Vector3(0.07 + Math.random() * 0.1, 0.07 + Math.random() * 0.1, 0.07 + Math.random() * 0.1),
+          driftAmp: 0.1 + Math.random() * 0.14,
         });
       }
     }
@@ -171,9 +172,9 @@ function init() {
   let velX = 0, velY = 0;
   let isDragging = false;
   let lastX = 0, lastY = 0, lastDragT = 0;
-  const ROT_PER_PIXEL = 0.008;
-  const FRICTION = 1.4; // higher = coasting spin settles faster
-  const BASE_SPIN = 0.045; // rad/sec, gentle idle tumble once coasting has settled
+  const ROT_PER_PIXEL = 0.0055;
+  const FRICTION = 1.0; // lower = coasting spin decays more gradually, feels softer
+  const BASE_SPIN = 0.025; // rad/sec, gentle idle tumble once coasting has settled
 
   if (hero) {
     hero.style.cursor = 'grab';
@@ -213,7 +214,7 @@ function init() {
     const dt = Math.min((now - lastFrameT) / 1000, 0.05);
     lastFrameT = now;
 
-    const damp = reducedMotion ? 1 : 0.09;
+    const damp = reducedMotion ? 1 : 0.06; // softer easing between the current and scroll-target explode state
     currentT += (explodeFraction() - currentT) * damp;
     currentOpacity += (1 - currentOpacity) * (reducedMotion ? 1 : 0.12); // fades in once on load, then holds
 
@@ -253,8 +254,11 @@ function init() {
         c.mesh.position.add(_wander);
       }
 
-      const spin = reducedMotion ? 0 : elapsed * 0.00035 * c.spinRate * localT;
-      c.mesh.quaternion.setFromAxisAngle(c.tumbleAxis, c.tumbleAngle * localT + spin);
+      // a bounded back-and-forth wobble, not an unbounded continuous spin —
+      // it was previously accumulating angle forever, which read as the
+      // pieces spinning faster and faster the longer they sat there
+      const wobble = reducedMotion ? 0 : Math.sin(elapsed * 0.001 * c.spinRate + c.spinPhase) * 0.3 * localT;
+      c.mesh.quaternion.setFromAxisAngle(c.tumbleAxis, c.tumbleAngle * localT + wobble);
     });
 
     if (!isDragging) {
