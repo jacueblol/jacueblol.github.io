@@ -4,7 +4,7 @@
   --bg-elevated: #121319;
   --text: #f2f3f7;
   --text-dim: #9a9ba8;
-  --text-faint: #63647a;
+  --text-faint: #7b7c92; /* verified >=4.5:1 against both --bg and --bg-elevated, at the small sizes this is used at */
   --accent: #8ecae6;
   --accent-2: #b794f6;
   --border: #23242f;
@@ -24,8 +24,8 @@
   --bg-elevated: #ffffff;
   --text: #17181d;
   --text-dim: #55565f;
-  --text-faint: #8b8c96;
-  --accent: #3b7ea1;
+  --text-faint: #6f707a; /* verified >=4.5:1 against --bg */
+  --accent: #35789b; /* verified >=4.5:1 against --bg */
   --accent-2: #7c5cbf;
   --border: #e4e3de;
   --border-strong: #d2d1ca;
@@ -36,6 +36,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* keeps anchor jumps (nav links, CTA buttons, command-palette "go to"
+     commands) from landing a section heading right behind the fixed nav */
+  scroll-padding-top: 84px;
 }
 
 @media (prefers-reduced-motion: reduce) {
