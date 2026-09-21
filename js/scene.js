@@ -42,6 +42,17 @@ function init() {
   fill.position.set(-6, -2, -4);
   scene.add(fill);
 
+  // the hemisphere light's "ground" bounce color should match the page
+  // background, not stay pinned to dark theme's — otherwise the cube's
+  // plastic (inner) faces pick up a dark tint even in light theme
+  const root = document.documentElement;
+  function syncGroundLight() {
+    const bg = getComputedStyle(root).getPropertyValue('--bg').trim() || '#0b0c10';
+    hemi.groundColor.set(bg);
+  }
+  syncGroundLight();
+  new MutationObserver(syncGroundLight).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
   /* ---------- build the cube: 26 cubies (real Rubik's cubes have no
      visible center piece), each colored on its outward-facing sides only,
      plain dark plastic on the sides that face inward while assembled. */

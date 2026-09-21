@@ -29,6 +29,12 @@
   --accent-2: #7c5cbf;
   --border: #e4e3de;
   --border-strong: #d2d1ca;
+  /* dark theme's shadows lean on a white inset highlight for a glassy
+     edge, which just disappears on a white card — light theme instead
+     gets a plain, much softer shadow tinted toward --text rather than
+     pure black, which reads as elevation without looking heavy */
+  --shadow-card: 0 12px 28px -18px rgba(23, 24, 29, 0.12);
+  --shadow-card-hover: 0 18px 40px -18px rgba(23, 24, 29, 0.16);
   color-scheme: light;
 }
 
@@ -62,7 +68,7 @@ body {
 
 ::selection {
   background: var(--accent-2);
-  color: #0b0c10;
+  color: var(--bg); /* not a hardcoded dark value — light theme's accent-2 is too mid-toned for dark text at AA */
 }
 
 a { color: inherit; text-decoration: none; }
@@ -88,7 +94,7 @@ p:last-child { margin-bottom: 0; }
   left: -999px;
   top: 0;
   background: var(--accent);
-  color: #0b0c10;
+  color: var(--bg); /* verified >=4.5:1 in both themes; a hardcoded dark value failed AA against light theme's accent */
   padding: 0.75em 1em;
   z-index: 1000;
   border-radius: 0 0 8px 0;
@@ -287,10 +293,16 @@ p:last-child { margin-bottom: 0; }
     0 0 72px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 :root[data-theme="light"] .hero-name {
-  /* the neon bloom above assumes a dark ground to glow against; on light
-     theme it would just look hazy, so fall back to a cleaner treatment */
-  background: linear-gradient(120deg, var(--text) 30%, var(--accent) 70%, var(--accent-2) 100%);
-  text-shadow: 0 0 20px var(--bg), 0 0 20px var(--bg);
+  /* the neon bloom above needs a dark ground to glow against — on light
+     theme it would just look hazy. This gets its own treatment rather
+     than a dimmed copy: a brighter, more saturated gradient than the
+     functional --accent/--accent-2 (which are deliberately darkened for
+     text-on-white contrast elsewhere), plus a soft colored drop shadow
+     for depth instead of a symmetric halo. */
+  background: linear-gradient(100deg, #1f7dc2 0%, #8a4fe0 55%, #1f7dc2 100%);
+  text-shadow:
+    0 6px 24px color-mix(in srgb, #8a4fe0 30%, transparent),
+    0 2px 10px color-mix(in srgb, #1f7dc2 25%, transparent);
 }
 
 .hero-role {
