@@ -271,11 +271,23 @@ p:last-child { margin-bottom: 0; }
   font-size: clamp(3.4rem, 12vw, 8.2rem);
   line-height: 0.98;
   margin-bottom: 0.9rem;
-  background: linear-gradient(120deg, var(--text) 40%, var(--accent) 70%, var(--accent-2) 100%);
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 55%, var(--accent) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 30px var(--bg), 0 0 60px var(--bg);
+  /* a tight dark edge for contrast against the cube, then layered
+     accent-colored blooms for an actual neon glow instead of a shadow */
+  text-shadow:
+    0 0 4px var(--bg),
+    0 0 16px color-mix(in srgb, var(--accent) 75%, transparent),
+    0 0 36px color-mix(in srgb, var(--accent-2) 55%, transparent),
+    0 0 72px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+:root[data-theme="light"] .hero-name {
+  /* the neon bloom above assumes a dark ground to glow against; on light
+     theme it would just look hazy, so fall back to a cleaner treatment */
+  background: linear-gradient(120deg, var(--text) 30%, var(--accent) 70%, var(--accent-2) 100%);
+  text-shadow: 0 0 20px var(--bg), 0 0 20px var(--bg);
 }
 
 .hero-role {

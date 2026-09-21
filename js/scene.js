@@ -109,15 +109,17 @@ function init() {
   function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
 
   /* ---------- scroll-driven deconstruction ----------
-     explode progress is measured against the hero section's own height, so
-     the cube finishes coming apart right around where the hero ends. It
+     explode progress is measured against a multiple of the hero section's
+     own height (EXPLODE_SCROLL_RANGE), so it takes a more gradual scroll
+     to fully come apart instead of finishing within one hero-height. It
      stays visible (and interactive) for the rest of the page — it just
      fades in once on load, then holds at full opacity. */
   const hero = document.getElementById('hero');
+  const EXPLODE_SCROLL_RANGE = 2.2;
 
   function explodeFraction() {
     const heroHeight = hero ? hero.offsetHeight : window.innerHeight;
-    return clamp(window.scrollY / heroHeight, 0, 1);
+    return clamp(window.scrollY / (heroHeight * EXPLODE_SCROLL_RANGE), 0, 1);
   }
 
   function resize() {
