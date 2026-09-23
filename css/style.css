@@ -243,7 +243,11 @@ p:last-child { margin-bottom: 0; }
   height: 2px;
   background: var(--text);
   border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
 }
+.nav-toggle.open span:first-child { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:last-child { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- hero ---------- */
 .hero {
