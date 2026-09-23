@@ -704,17 +704,6 @@ p:last-child { margin-bottom: 0; }
   line-height: 1;
   margin-bottom: 1.8rem;
 }
-.footer-email {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  color: var(--text);
-  border-bottom: 1px solid var(--border-strong);
-  padding-bottom: 0.2rem;
-  margin-bottom: 2rem;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.footer-email:hover { color: var(--accent); border-color: var(--accent); }
 .footer-links {
   display: flex;
   justify-content: center;
@@ -734,7 +723,7 @@ p:last-child { margin-bottom: 0; }
   color: var(--text-faint);
 }
 
-/* ---------- modals (résumé preview + command palette) ---------- */
+/* ---------- modals (command palette + case study) ---------- */
 .modal {
   padding: 0;
   border: 1px solid var(--border-strong);
@@ -753,16 +742,6 @@ p:last-child { margin-bottom: 0; }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* `display` here MUST be scoped to [open] — the native <dialog> default
-   (dialog:not([open]) { display: none }) is a UA-stylesheet rule, and any
-   unscoped author rule setting display on the element overrides it
-   regardless of specificity, which is what was pinning these open. */
-.resume-modal[open] {
-  width: min(860px, 92vw);
-  height: min(85vh, 1000px);
-  display: flex;
-  flex-direction: column;
-}
 .modal-head {
   display: flex;
   align-items: center;
@@ -783,13 +762,10 @@ p:last-child { margin-bottom: 0; }
 .modal-head-actions a:hover { color: var(--accent); }
 .modal-head-actions .icon-btn { width: 28px; height: 28px; }
 .modal-head-actions .icon-btn .icon { width: 14px; height: 14px; }
-.resume-modal iframe {
-  flex: 1;
-  width: 100%;
-  border: 0;
-  background: #ffffff;
-}
-
+/* `display` here MUST be scoped to [open] — the native <dialog> default
+   (dialog:not([open]) { display: none }) is a UA-stylesheet rule, and any
+   unscoped author rule setting display on the element overrides it
+   regardless of specificity, which is what was pinning these open. */
 .case-study-modal[open] {
   width: min(640px, 92vw);
   max-height: 82vh;

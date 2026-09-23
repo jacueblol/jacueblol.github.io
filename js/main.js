@@ -160,29 +160,6 @@
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1800);
   }
 
-  /* ---------- résumé preview modal ---------- */
-  const resumeModal = document.getElementById('resumeModal');
-  const resumeModalClose = document.getElementById('resumeModalClose');
-
-  function openResumeModal() {
-    // showModal() throws if called while already open, and the command
-    // palette shouldn't be sitting open underneath this one
-    if (typeof resumeModal.showModal !== 'function' || resumeModal.open) return;
-    closeCommandPalette();
-    resumeModal.showModal();
-  }
-  document.querySelectorAll('[data-resume-trigger]').forEach((el) => {
-    el.addEventListener('click', (e) => {
-      if (typeof resumeModal.showModal !== 'function') return; // no <dialog> support: let the link open normally
-      e.preventDefault();
-      openResumeModal();
-    });
-  });
-  resumeModalClose.addEventListener('click', () => resumeModal.close());
-  resumeModal.addEventListener('click', (e) => {
-    if (e.target === resumeModal) resumeModal.close(); // click on the backdrop
-  });
-
   /* ---------- command palette (Ctrl/Cmd+K) ---------- */
   const commandPalette = document.getElementById('commandPalette');
   const commandInput = document.getElementById('commandInput');
@@ -194,17 +171,6 @@
     if (el) el.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
   }
 
-  function copyEmail() {
-    const email = 'jacob_hotz@mines.edu';
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email)
-        .then(() => showToast('Email copied to clipboard'))
-        .catch(() => showToast(email));
-    } else {
-      showToast(email);
-    }
-  }
-
   const COMMANDS = [
     { label: 'Go to About', hint: 'section', action: () => scrollToSection('about') },
     { label: 'Go to Experience', hint: 'section', action: () => scrollToSection('experience') },
@@ -212,8 +178,6 @@
     { label: 'Go to Skills', hint: 'section', action: () => scrollToSection('skills') },
     { label: 'Go to Contact', hint: 'section', action: () => scrollToSection('contact') },
     { label: 'Toggle theme', hint: 'dark / light', action: () => showToast(`Theme: ${toggleTheme()}`) },
-    { label: 'Copy email address', hint: 'clipboard', action: copyEmail },
-    { label: 'View résumé', hint: 'preview', action: openResumeModal },
     { label: 'Open GitHub profile', hint: '↗', action: () => window.open('https://github.com/jacueblol', '_blank', 'noopener') },
     { label: 'Open LinkedIn profile', hint: '↗', action: () => window.open('https://linkedin.com/in/jacob-hotz', '_blank', 'noopener') },
     { label: 'View site source', hint: '↗', action: () => window.open('https://github.com/jacueblol/jacueblol.github.io', '_blank', 'noopener') },
@@ -262,7 +226,6 @@
 
   function openCommandPalette() {
     if (typeof commandPalette.showModal !== 'function' || commandPalette.open) return;
-    if (resumeModal.open) resumeModal.close();
     commandInput.value = '';
     filterCommands('');
     commandPalette.showModal();

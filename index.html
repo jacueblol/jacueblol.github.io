@@ -78,7 +78,6 @@
         <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <a class="btn btn-small" href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener" data-resume-trigger>résumé</a>
     </div>
   </nav>
 </header>
@@ -102,7 +101,7 @@
         <a href="#projects" class="btn btn-primary">view projects</a>
         <a href="#contact" class="btn btn-ghost">get in touch</a>
       </div>
-      <p class="hero-hint" data-reveal>press ⌘K or Ctrl+K — jump around, toggle theme, copy email</p>
+      <p class="hero-hint" data-reveal>press ⌘K or Ctrl+K — jump around, toggle theme</p>
     </div>
     <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
       <span></span>
@@ -402,32 +401,17 @@
   <div class="footer-inner" data-reveal>
     <p class="footer-eyebrow">05 / say hi</p>
     <h2 class="footer-title">Let's build<br>something.</h2>
-    <a class="footer-email" href="mailto:jacob_hotz@mines.edu">jacob_hotz@mines.edu</a>
     <div class="footer-links">
       <a href="https://github.com/jacueblol" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://linkedin.com/in/jacob-hotz" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener" data-resume-trigger>Résumé ↗</a>
       <a href="https://github.com/jacueblol/jacueblol.github.io" target="_blank" rel="noopener">Source ↗</a>
     </div>
     <p class="footer-note">San Diego, CA · built with vanilla HTML/CSS/JS + WebGL · 26 real cubies, a spring-damper for your cursor, and scrollY for everything else</p>
   </div>
 </footer>
 
-<dialog id="resumeModal" class="modal resume-modal">
-  <div class="modal-head">
-    <span>Résumé — Jacob Hotz</span>
-    <div class="modal-head-actions">
-      <a href="assets/jacob-hotz-resume.pdf" target="_blank" rel="noopener">open in new tab ↗</a>
-      <button id="resumeModalClose" class="icon-btn" aria-label="Close résumé preview">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </button>
-    </div>
-  </div>
-  <iframe src="assets/jacob-hotz-resume.pdf" title="Jacob Hotz résumé" loading="lazy"></iframe>
-</dialog>
-
 <dialog id="commandPalette" class="modal command-palette">
-  <input type="text" id="commandInput" class="command-input" placeholder="Jump to a section, toggle theme, copy email…" autocomplete="off" spellcheck="false" aria-label="Command palette search">
+  <input type="text" id="commandInput" class="command-input" placeholder="Jump to a section, toggle theme…" autocomplete="off" spellcheck="false" aria-label="Command palette search">
   <ul id="commandList" class="command-list"></ul>
 </dialog>
 

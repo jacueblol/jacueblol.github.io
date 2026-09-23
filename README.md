@@ -10,8 +10,7 @@ A single-page portfolio built without a framework — plain HTML/CSS/JS, plus Th
 
 Other things worth knowing about:
 
-- **Ctrl/Cmd+K command palette** — jump to any section, toggle theme, copy email, open the résumé, jump to GitHub/LinkedIn
-- **Inline résumé preview** — opens in a modal instead of a raw PDF tab
+- **Ctrl/Cmd+K command palette** — jump to any section, toggle theme, jump to GitHub/LinkedIn
 - **Expandable project case studies** — a problem/approach/result writeup per project, not just a card and a GitHub link
 - **Light and dark themes**, tuned separately rather than one being a dimmed copy of the other (the neon hero treatment needs a dark background to glow against, so light mode gets its own look)
 - Live GitHub stats (repo count, stars) fetched client-side
@@ -27,9 +26,9 @@ Vanilla HTML/CSS/JS. [Three.js](https://threejs.org/) (loaded from a CDN as an E
 ```
 index.html      the page
 css/style.css    theme tokens, layout, components
-js/main.js       nav, theme toggle, command palette, résumé modal, reveal-on-scroll
+js/main.js       nav, theme toggle, command palette, reveal-on-scroll
 js/scene.js      the Three.js cube — explosion, drag, hover-repel, lighting
-assets/          résumé PDF, favicon, OG image
+assets/          favicon, OG image, home-screen icons
 404.html         custom not-found page
 ```
 
